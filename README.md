@@ -15,68 +15,59 @@
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
+- [🙏 Acknowledgements](#acknowledgements)
 - [📝 License](#license)
+
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [MyEnumerable] <a name="about-project"></a>
+# 📖 [BLOG APP] <a name="about-project"></a>
 
-> **MyEnumerable** is a project that is built to decode Morse code.
-
+**[Blog app]** is an application designed for users to make and view their comments.
 
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
 
-<details>
-<summary>Server</summary>
   <ul>
     <li><a href="https://www.ruby-lang.org/en/">Ruby</a></li>
   </ul>
-</details>
 
 <!-- Features -->
 
 ### Key Features <a name="key-features"></a>
 
-- **Own Enumerable Module**
+- **[Make comment as a user]**
+- **[Set up associations between models]**
+- **[Write SQL queries with Active Record]**
+- **[Use validations for models]**
+- **[Write unit tests for models]**
+- **[Write request tests for models]**
+- **[Set up the view model]**
+- **[Use preprocessed HTML file with embedded Ruby code.]**
+- **[Use layouts and templates for shared content.]**
+- **[Limit access to web app resources based on authorization rules.]**
+- **[Build an API that is RESTful.]**
+
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- GETTING STARTED -->
+
 ## 💻 Getting Started <a name="getting-started"></a>
+
+To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-- **Ruby**:
+In order to run this project you need the following installed in your local system
 
-### Install
-
-To install on Mac Os run following commands:
-
-```sh
- brew install rbenv ruby-build
-# Add rbenv to bash so that it loads every time you open a terminal
-echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
-source ~/.bash_profile
-
-# Install Ruby
-rbenv install 3.0.1
-rbenv global 3.0.1
-ruby -v
-```
-Installing Ruby on Windows is a little more difficult than installing it on another OS. We would recommend using [WSL](https://learn.microsoft.com/en-us/windows/wsl/about), but you can also try to install Ruby directly on your OS with [rubyinstaller](https://rubyinstaller.org/).
-
-Note:
-`WSL only works on 64-bit installations of Windows.`
-
-If you are using a 64-bit version of Windows 10, we recommend following [this](https://gorails.com/setup/windows/10) article to install Ruby.
-
-If you can not use WSL then you should follow these steps:
-
-- Download the last version of [RubyInstaller](https://rubyinstaller.org/downloads/).
-- Run RubyInstaller and follow the steps described [here](https://stackify.com/install-ruby-on-windows-everything-you-need-to-get-going/).
-
-If you are familiar with [docker](https://www.docker.com/), you could also use it.
+<ul>
+<li>Ruby</li>
+<li>Git CLI</li>
+<li>Github account</li>
+</ul>
 
 ### Setup
 
@@ -84,19 +75,30 @@ Clone this repository to your desired folder:
 
 ```sh
   cd my-folder
-  git clone git@github.com:MosDevx/Ruby-Enumerable.git
+  git clone https://github.com/donmark2k/blog_app.git
+```
+
+### Install
+
+Install this project with:
+
+```sh
+  cd blog_app
+  bundle install
 ```
 
 ### Usage
 
-If you have ruby installed in your PC the simply start IRB(**Interactive Ruby Shell**) on terminal using:
+To run the project, execute the following command:
 
 ```sh
-  $ irb
-
+  ruby main.rb
 ```
+### Run tests
 
-Thats it now you can execute your program on termonal:)
+-  Type `Rspec`: To run test `
+-  Type `npx stylelint "**/*.{css,scss}"` to run for stylelint errors
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,17 +106,23 @@ Thats it now you can execute your program on termonal:)
 
 ## 👥 Authors <a name="authors"></a>
 
-👤 **Ayesha Arshad**
+👤**Chukwuemeka Ochuba**
 
-- GitHub: [@shella12](https://github.com/shella12)
-- Twitter: [@Ayesha Arshad](https://twitter.com/AyeshaA03712974)
-- LinkedIn: [Ayesha Arshad](https://www.linkedin.com/in/ayesha-arshad-a690a015a/)
+- GitHub: [@Donmark2k](https://github.com/Donmark2k)
+- Twitter: [@Donmark2k](https://twitter.com/donmark2k)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/chukwuemeka-ochuba/)
 
-👤 **Moses Wamae**
+👤 **John Adibe**
 
-- GitHub: [@mosdevx](https://github.com/mosdevx)
-- Twitter: [@moseswamae7](https://twitter.com/moseswamae7)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/moses-wamae-a13a67244)
+- GitHub: [@Johnadibe](https://github.com/Johnadibe)
+- Twitter: [@JohnAdibe2](https://twitter.com/JohnAdibe2)
+- LinkedIn: [@John Adibe](https://www.linkedin.com/in/john-adibe/)
+
+👤 **Aubin SIMPEZE**
+
+- GitHub: [@githubhandle](https://github.com/aubinleyoung)
+- Twitter: [@twitterhandle](https://twitter.com/Aubin_Simpeze)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/aubin-simpeze/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -122,7 +130,11 @@ Thats it now you can execute your program on termonal:)
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **[Live Demo]**
+
+- [ ] **[Build the front end of the system]**
+- [ ] **[Style the front end]**
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -132,12 +144,24 @@ Thats it now you can execute your program on termonal:)
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](../../issues/).
+Feel free to check the [issues page](https://github.com/donmark2k/blog_app/issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- SUPPORT -->
 
 ## ⭐️ Show your support <a name="support"></a>
 
-Give a ⭐️ if you like this project!
+If you like this project please leave a STAR to the [Github repo](https://github.com/donmark2k/
+blog_app/)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+I would like to appreciate [Microverse](https://www.microverse.org/) for providing the resources and the platform for us to be a Professional full-stack developer.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
@@ -145,5 +169,6 @@ Give a ⭐️ if you like this project!
 ## 📝 License <a name="license"></a>
 
 This project is [MIT](./LICENSE) licensed.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
