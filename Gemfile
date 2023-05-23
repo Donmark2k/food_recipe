@@ -1,10 +1,11 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.1"
+ruby "3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -65,7 +66,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem "rails_live_reload"
+  # gem "rails_live_reload"
   gem "dotenv-rails"
   gem "letter_opener"
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
