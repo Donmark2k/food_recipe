@@ -40,6 +40,7 @@ gem "jbuilder"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 gem "devise"
+gem "cancancan"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
@@ -69,6 +70,7 @@ group :development do
   # gem "rails_live_reload"
   gem "dotenv-rails"
   gem "letter_opener"
+  gem "bullet"
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
