@@ -28,10 +28,12 @@ class Inventory < ApplicationRecord
   end
 
 
-  def remove_inventory_food(food:nil, quantity:0)
+  def remove_food_item(food:nil, quantity:0)
     inventory_food = inventory_foods.find_by(food: food)
     inventory_food.quantity -= quantity.to_i
     inventory_food.save
   end
+
+
 
 end
