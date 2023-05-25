@@ -69,7 +69,7 @@ group :development do
   gem 'bullet'
   gem 'dotenv-rails'
   gem 'letter_opener'
-  gem 'rails_live_reload'
+  #gem 'rails_live_reload'
   gem 'web-console'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
