@@ -1,0 +1,18 @@
+<div class="bg-white rounded shadow p-4 flex">
+  <!-- Left Column -->
+  <div class="w-1/4 pr-4">
+    <h2 class="text-xl font-bold">
+      <%= link_to recipe.title, recipe_path(recipe), class: 'hover:underline' %>
+    </h2>
+
+       <p class="text-gray-700 mt-2"><%= recipe.user.name %></p>
+
+  </div>
+
+  <!-- Right Column -->
+  <div class="w-3/4">
+    <p class="text-gray-700 mt-2">Total Food Item:<%= recipe.quantity %></p>
+        <p class="text-gray-700 mt-2">Total Price: <%= food.price %></p>
+
+  </div>
+</div>
