@@ -20,6 +20,12 @@ class RecipesController < ApplicationController
   # GET /recipes/1/edit
   def edit; end
 
+  def toggle
+    @recipe = Recipe.find(params[:id])
+    @recipe.toggle!(:public)
+    redirect_to @recipe
+  end
+
   # POST /recipes or /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
