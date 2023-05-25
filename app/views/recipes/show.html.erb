@@ -4,38 +4,47 @@
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
     <h1 class="text-2xl">
-    <%= @recipe.name %>
-  </h1>
+      <%= @recipe.name %>
+    </h1>
 
-  <div class="flex">
-    
-    <div>
-    <p class="my-5 flex">
-    <strong class="block font-medium mb-1">Preparation time:</strong>
-    <%= @recipe.preparation_time %>
-    <% if @recipe.preparation_time > 0 %>
-  hours
-  <%else%>
-  hour
-<% end %>
-  </p>
+    <% if @recipe.public? || @recipe.user == current_user %>
+      <div class="flex items-center">
+        <div>
+          <p class="my-5 flex">
+            <strong class="block font-medium mb-1">Preparation time:</strong>
+            <%= @recipe.preparation_time %> <%= pluralize(@recipe.preparation_time, 'hour') %>
+          </p>
 
-  <p class="my-5 flex">
-    <strong class="block font-medium mb-1">Cooking time:</strong>
-    <%= @recipe.cooking_time %>
-    <% if @recipe.preparation_time > 0 %>
-  hours
-  <%else%>
-  hour
-<% end %>
-  </p></div>
-  <div>
-    <% if @recipe.user == current_user %>
-  <%= form_with(model: @recipe, class: "contents") do |f| %>
-    <%= f.label :public %>
-    <%= f.check_box :public, onchange: "this.form.submit();" %>
-  <% end %>
-<% end %>
-  </div>
+          <p class="my-5 flex">
+            <strong class="block font-medium mb-1">Cooking time:</strong>
+            <%= @recipe.cooking_time %> <%= pluralize(@recipe.cooking_time, 'hour') %>
+          </p>
+        </div>
+
+        <div>
+          <% if @recipe.user == current_user %>
+            <%= form_with(model: @recipe, class: "contents") do |f| %>
+              <%= f.label :public, class: "inline-block mr-2" %>
+              <%= f.check_box :public, onchange: "this.form.submit();", class: "toggle-button" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <% if @recipe.user == current_user %>
+        <div>
+          <%= link_to "Add New Food", new_food_path, class: "add-food-button inline-block mt-4" %>
+        </div>
+      <% end %>
+
+      <div class="mt-4">
+        <%= link_to "Generate Shopping List", generate_shopping_list_path(@recipe), class: "shopping-list-button mr-2" %>
+        <%= link_to "Add Ingredients", add_ingredients_path(@recipe), class: "add-ingredients-button" %>
+      </div>
+
+      <div class="modal">
+        <!-- Modal content here -->
+      </div>
+    <% end %>
   </div>
 </div>
