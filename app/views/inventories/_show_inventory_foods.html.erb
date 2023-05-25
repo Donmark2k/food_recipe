@@ -1,0 +1,22 @@
+<table class="min-w-full">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Food</th>
+      <th class="px-4 py-2">Quantity</th>
+      <th class="px-4 py-2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% inventory_foods.each do |inventory_food| %>
+      <tr>
+        <td class="border px-4 py-2"><%= inventory_food.food.name %></td>
+        <td class="border px-4 py-2"><%= inventory_food.quantity %></td>
+        <td class="border px-4 py-2">
+       <div class="inline-block ml-2">
+      <%= button_to 'Destroy this inventory_food', inventory_food_path(inventory_food), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
