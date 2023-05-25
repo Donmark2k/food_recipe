@@ -11,6 +11,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/new
   def new
+    @current_user = current_user
     @recipe = Recipe.new
   end
 
