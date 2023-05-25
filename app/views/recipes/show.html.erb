@@ -29,9 +29,13 @@
   hour
 <% end %>
   </p></div>
-  <%=form_with(model: @recipe, class: "contents") do |f|%>
-  <%= f.label :public %>
-  <%= f.check_box :public, onchange: "this.form.submit();" %>
+  <div>
+    <% if @recipe.user == current_user %>
+  <%= form_with(model: @recipe, class: "contents") do |f| %>
+    <%= f.label :public %>
+    <%= f.check_box :public, onchange: "this.form.submit();" %>
+  <% end %>
 <% end %>
+  </div>
   </div>
 </div>
