@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   devise_scope :user do 
 
   get '/users/sign_out', to: 'devise/sessions#destroy'
+
+  get '/inventories/:id/test_method', to: 'inventories#test_method', as: 'test_method'
+  post '/inventories/:id/add_food_item', to: 'inventories#add_food_item', as: 'add_food_item'
   resources :recipes
   resources :recipe_foods
   resources :foods

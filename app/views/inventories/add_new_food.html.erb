@@ -1,0 +1,44 @@
+   <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block " id="notice"><%= notice %></p>
+    <% end %>
+
+<% @foods.each do |food| %>
+
+<div id="<%= dom_id food %>" class="flex justify-around bg-red-300 w-5/6 m-auto">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= food.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Measurement unit:</strong>
+    <%= food.measurement_unit %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Price:</strong>
+    <%= food.price %>
+  </p>
+
+
+  <p class="">
+      <%= form_with(url: add_food_item_path(), method: :post)  do |form| %>
+    <p  class="my-5 ">
+     <%= form.hidden_field :food_id, value: food.id %>
+      <%= form.label :quantity %>
+      <%= form.number_field :quantity ,value: 1, class:"w-24 mx-1"%>
+
+      <%= form.submit "Add to Inventory" , class:"ml-4"%>
+    </p>
+  <%end%>
+  </p>
+
+
+
+  <%# if action_name != "show" %>
+    <%#= link_to "Show this food", food, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%#= link_to 'Edit this food', edit_food_path(food), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <%# <hr class="mt-6"> %>
+  <%# end %>
+</div>
+<%end%>
