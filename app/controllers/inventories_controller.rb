@@ -8,7 +8,7 @@ class InventoriesController < ApplicationController
   end
 
   # GET /inventories/1 or /inventories/1.json
-  def show;
+  def show
     @inventory_foods = @inventory.inventory_foods
   end
 
@@ -56,6 +56,27 @@ class InventoriesController < ApplicationController
       format.html { redirect_to inventories_url, notice: 'Inventory was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def test_method
+    # authorize! :test_method, @inventory
+    puts "==================="
+    puts "test_method called"
+    @foods = Food.all 
+    render 'add_new_food'
+  end
+
+  def add_food_item
+    # authorize! :add_food_item, @inventory
+    puts "==================="
+    puts "add_food_item called"
+    @inventory = Inventory.find(params[:id])
+    quantity = params[:quantity]
+    @food = Food.find(params[:food_id])
+   
+    @inventory.add_food_item(food:@food, quantity:quantity)
+
+    redirect_to request.referrer, notice: 'Food was successfully added to inventory.'
   end
 
   private
