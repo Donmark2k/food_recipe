@@ -1,0 +1,47 @@
+<h1 class="text-center text-3xl font-bold">Shopping List</h1>
+
+<div class='flex-col mx-auto text-lg my-4 font-semibold w-3/6 '>
+
+	<div class='flex  justify-between '>
+		<p>Amount of food to buy: <%=@shopping_list_foods.size %> </p>
+		<p>Recipe: <%=@recipe.name %></p>
+	</div>	
+	
+	<div class='flex justify-between '>
+		<p>Total Value of Food needed: <%=@total_value %> </p>
+		<p>Inventory: <%=@inventory.name %></p>
+	</div>
+	
+
+
+</div>
+
+<div class="mx-auto bg-red-100 w-2/6">
+<table class=" text-center mx-auto w-full">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Food</th>
+      <th class="px-4 py-2">Quantity</th>
+      <th class="px-4 py-2">price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @shopping_list_foods.each do |food| %>
+      <tr>
+        <td class="border px-4 py-2   bg-red-100"><%= food.food.name %></td>
+        <td class="border px-4 py-2"><%= food.quantity %> <%= food.food.measurement_unit%> </td>
+        <td class="border px-4 py-2">
+       <div class="inline-block ">
+					<%= food.quantity * food.food.price %>
+    </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+</div>
+
+
+```
