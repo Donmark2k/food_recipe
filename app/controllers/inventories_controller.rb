@@ -62,7 +62,7 @@ class InventoriesController < ApplicationController
     # authorize! :test_method, @inventory
     puts "==================="
     puts "test_method called"
-    @foods = Food.all 
+    @foods = Food.order(created_at: :desc)
     render 'add_new_food'
   end
 
