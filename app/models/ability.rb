@@ -12,7 +12,7 @@ class Ability
     	can :create, :all
     	can :update, :all
     	can :destroy, :all
-      can :test_method, Inventory
+      can :show_inventory_foods, Inventory
       can :add_food_item, Inventory
     else
     	can :read, :all

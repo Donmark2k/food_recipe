@@ -1,7 +1,13 @@
    <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block " id="notice"><%= notice %></p>
     <% end %>
+  <br/>     
+    
 
+    <div class="flex justify-between items-center mx-4 mb-4">
+      <%= link_to 'Back to Inventory', inventory_path(@inventory) , class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'New food', new_food_path(originator: "Inventory"), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
 <% @foods.each do |food| %>
 
 <div id="<%= dom_id food %>" class="flex justify-around bg-red-300 w-5/6 m-auto">
@@ -26,7 +32,7 @@
     <p  class="my-5 ">
      <%= form.hidden_field :food_id, value: food.id %>
       <%= form.label :quantity %>
-      <%= form.number_field :quantity ,value: 1, class:"w-24 mx-1"%>
+      <%= form.number_field :quantity ,value: 1, min:1, class:"w-24 mx-1"%>
 
       <%= form.submit "Add to Inventory" , class:"ml-4"%>
     </p>

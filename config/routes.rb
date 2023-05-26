@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get '/users/sign_out', to: 'devise/sessions#destroy'
 
-  get '/inventories/:id/test_method', to: 'inventories#test_method', as: 'test_method'
+  get '/inventories/:id/show_inventory_foods', to: 'inventories#show_inventory_foods', as: 'show_inventory_foods'
   post '/inventories/:id/add_food_item', to: 'inventories#add_food_item', as: 'add_food_item'
   resources :recipes
   resources :recipe_foods
