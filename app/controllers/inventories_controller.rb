@@ -4,7 +4,8 @@ class InventoriesController < ApplicationController
 
   # GET /inventories or /inventories.json
   def index
-    @inventories = current_user.inventories
+    # @inventories = current_user.inventories
+    @inventories = Inventory.all
   end
 
   # GET /inventories/1 or /inventories/1.json
