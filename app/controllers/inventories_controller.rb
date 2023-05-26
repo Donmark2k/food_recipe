@@ -22,7 +22,7 @@ class InventoriesController < ApplicationController
 
   # POST /inventories or /inventories.json
   def create
-    @inventory = Inventory.new(user: current_user,name: inventory_params[:name])
+    @inventory = Inventory.new(user: current_user, name: inventory_params[:name])
 
     respond_to do |format|
       if @inventory.save
@@ -60,21 +60,21 @@ class InventoriesController < ApplicationController
 
   def show_inventory_foods
     # authorize! :test_method, @inventory
-    puts "==================="
-    puts "test_method called"
+    puts '==================='
+    puts 'test_method called'
     @foods = Food.order(created_at: :desc)
     render 'add_new_food'
   end
 
   def add_food_item
     # authorize! :add_food_item, @inventory
-    puts "==================="
-    puts "add_food_item called"
+    puts '==================='
+    puts 'add_food_item called'
     @inventory = Inventory.find(params[:id])
     quantity = params[:quantity]
     @food = Food.find(params[:food_id])
-   
-    @inventory.add_food_item(food:@food, quantity:quantity)
+
+    @inventory.add_food_item(food: @food, quantity:)
 
     redirect_to request.referrer, notice: 'Food was successfully added to inventory.'
   end
