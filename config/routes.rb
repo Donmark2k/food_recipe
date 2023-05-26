@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   get '/inventories/:id/show_inventory_foods', to: 'inventories#show_inventory_foods', as: 'show_inventory_foods'
   post '/inventories/:id/add_food_item', to: 'inventories#add_food_item', as: 'add_food_item'
+  
+  get '/shopping_list', to: 'shopping_list#show', as: 'shopping_list'
+ 
   resources :recipes
   resources :recipe_foods
   resources :foods
