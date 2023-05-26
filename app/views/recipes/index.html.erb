@@ -9,7 +9,7 @@
   </div>
 
   <div id="recipes" class="min-w-full">
-    <%= render @recipes %>
+    <%# <%= render @recipes %> 
   <% @recipes.each do |recipe| %>
   <%= render 'shared/recipe', recipe: recipe%>
 <%end%>

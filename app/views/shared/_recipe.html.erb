@@ -2,7 +2,7 @@
   <!-- Left Column -->
   <div class="w-1/4 pr-4">
     <h2 class="text-xl font-bold">
-      <%= link_to recipe.title, recipe_path(recipe), class: 'hover:underline' %>
+      <%= link_to recipe.name, recipe_path(recipe), class: 'hover:underline' %>
     </h2>
 
     <% if current_user && current_user.id == recipe.user_id %>

@@ -1,4 +1,7 @@
-<h2 class='font-bold text-center text-lg'>Sign up</h2>
+<div class="flex justify-center items-center h-screen border border-gray-500">
+  <div class="container mx-auto">
+  <div class="rounded-lg bg-brown-500 p-4 border border-gray-100 my-5" >
+<h2 class='font-bold text-center text-lg py-2'>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -32,3 +35,6 @@
 
 <%= render "devise/shared/links" %>
   </div>
+  </div>
+</div>
+</div>
