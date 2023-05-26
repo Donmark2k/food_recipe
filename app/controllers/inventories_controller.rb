@@ -58,7 +58,7 @@ class InventoriesController < ApplicationController
     end
   end
 
-  def test_method
+  def show_inventory_foods
     # authorize! :test_method, @inventory
     puts "==================="
     puts "test_method called"
