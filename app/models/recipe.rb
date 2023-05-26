@@ -11,23 +11,21 @@ class Recipe < ApplicationRecord
   validates :public, inclusion: { in: [true, false] }
 
   def new_recipe_food(food, quantity)
-    recipe_food = recipe_foods.build(food: food, quantity: quantity)
+    recipe_food = recipe_foods.build(food:, quantity:)
     recipe_food.save
   end
 
   def update_recipe_food(food, quantity)
-    recipe_food = recipe_foods.find_by(food: food)
+    recipe_food = recipe_foods.find_by(food:)
     recipe_food.quantity += quantity.to_i
     recipe_food.save
   end
 
   def add_food_item(food: nil, quantity: 1)
-    if recipe_foods.find_by(food: food)
+    if recipe_foods.find_by(food:)
       update_recipe_food(food, quantity)
     else
       new_recipe_food(food, quantity)
     end
   end
-  
-
 end
