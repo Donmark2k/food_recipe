@@ -3,5 +3,12 @@
 
   <%= render "form", food: @food %>
 
+
+<% if request.fullpath.to_s.include?('inventories')%>
+  <%= link_to 'Back to inventory', :back, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+<%else%>
   <%= link_to 'Back to foods', foods_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+<%end%>
 </div>

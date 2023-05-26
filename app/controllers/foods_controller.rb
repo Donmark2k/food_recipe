@@ -20,11 +20,20 @@ class FoodsController < ApplicationController
   # POST /foods or /foods.json
   def create
     @food = Food.new(food_params)
+    puts '(())'*100
+    puts request.referer
 
     respond_to do |format|
       if @food.save
-        format.html { redirect_to food_url(@food), notice: 'Food was successfully created.' }
+        if request.referer.include? 'inventories'
+          inventory_id = params[:inventory_id] || extract_inventory_id
+        format.html { redirect_to inventory_specific_food_path(inventory_id: inventory_id, id:@food.id), notice: 'Food was successfully created.' }
+
         format.json { render :show, status: :created, location: @food }
+        else
+          format.html { redirect_to food_url(@food), notice: 'Food was successfully created.' }
+          format.json { render :show, status: :created, location: @food }
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @food.errors, status: :unprocessable_entity }
@@ -65,5 +74,12 @@ class FoodsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def food_params
     params.require(:food).permit(:name, :measurement_unit, :price)
+  end
+
+  def extract_inventory_id
+    referer_path = URI(request.referer).path
+    inventory_id = Rails.application.routes.recognize_path(referer_path)[:inventory_id]
+
+    inventory_id
   end
 end

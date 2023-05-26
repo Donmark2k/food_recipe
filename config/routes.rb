@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   resources :recipe_foods
   resources :foods
   resources :inventory_foods
-  resources :inventories
+  resources :inventories do
+    resources :foods, only: [:new, :create, :show], as: 'specific_foods'
+  end
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
