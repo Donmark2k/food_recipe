@@ -1,4 +1,4 @@
-<h2 class='font-bold text-center text-lg'>Sign up</h2>
+<h2 class='font-bold text-center text-3xl'>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -25,7 +25,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder:'password confirmation' %>
   </div>
 
-  <div class="mx-auto w-fit ring-4 my-4">
+  <div class="mx-auto w-fit ring-4 ring-lime-800 text-lg my-4 p-2 rounded-lg bg-lime-500 text-white font-semibold ">
     <%= f.submit "Sign up" %>
   </div>
 <% end %>

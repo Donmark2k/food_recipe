@@ -1,0 +1,52 @@
+   <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block " id="notice"><%= notice %></p>
+    <% end %>
+  <br/>     
+    
+
+    <div class="flex justify-between items-center mx-4 mb-4">
+      <%= link_to 'Back to Recipe', recipe_path(@recipe) , class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+    <%= link_to 'New food', new_recipe_specific_food_path(recipe_id:@recipe.id), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+		
+  </div>
+<% @foods.each do |food| %>
+
+<div id="<%= dom_id food %>" class="flex justify-around bg-teal-400 w-5/6 m-auto">
+  <p class="my-5 flex-none w-[150px]">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <strong class="block font-semibold text-xl  mb-1"><%= food.name %></strong>
+  </p>
+
+  <p class="my-5 flex-none w-[200px]" >
+    <strong class="block font-medium mb-1">Measurement unit:</strong>
+    <%= food.measurement_unit %>
+  </p>
+
+  <p class="my-5 flex-none w-[150px]">
+    <strong class="block font-medium mb-1">Price:</strong>
+    <%= food.price %>
+  </p>
+
+
+ 
+      <%= form_with(url: add_recipe_food_item_path(), method: :post)  do |form| %>
+    <p  class="my-5 ">
+     <%= form.hidden_field :food_id, value: food.id %>
+      <%= form.label :quantity %>
+      <%= form.number_field :quantity ,value: 1, min:1, class:"w-24 mx-1"%>
+
+      <%= form.submit "Add to Recipe" , class:"ml-6 rounded-lg py-3 px-2 bg-fuchsia-600 text-black font-medium"%>
+ 
+  <%end%>
+  </p>
+
+
+  <%# if action_name != "show" %>
+    <%#= link_to "Show this food", food, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%#= link_to 'Edit this food', edit_food_path(food), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <%# <hr class="mt-6"> %>
+  <%# end %>
+</div>
+ <hr class=" my-1 w-full " />
+<%end%>

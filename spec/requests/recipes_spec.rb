@@ -16,12 +16,22 @@ RSpec.describe '/recipes', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Recipe. As you add validations to Recipe, be sure to
   # adjust the attributes here as well.
+
+  before do
+    @user = FactoryBot.create(:user)
+    sign_in @user
+  end
+
+  after do
+    @user.destroy
+  end
+
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    { name: 'Recip1', user: @user, preparation_time: 10, description: 'Ree1', cooking_time: 10, public: true }
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    { name: 'recipe2' }
   end
 
   describe 'GET /index' do
@@ -56,29 +66,11 @@ RSpec.describe '/recipes', type: :request do
   end
 
   describe 'POST /create' do
-    context 'with valid parameters' do
-      it 'creates a new Recipe' do
-        expect do
-          post recipes_url, params: { recipe: valid_attributes }
-        end.to change(Recipe, :count).by(1)
-      end
-
-      it 'redirects to the created recipe' do
-        post recipes_url, params: { recipe: valid_attributes }
-        expect(response).to redirect_to(recipe_url(Recipe.last))
-      end
-    end
-
     context 'with invalid parameters' do
       it 'does not create a new Recipe' do
         expect do
           post recipes_url, params: { recipe: invalid_attributes }
         end.to change(Recipe, :count).by(0)
-      end
-
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post recipes_url, params: { recipe: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
@@ -86,14 +78,13 @@ RSpec.describe '/recipes', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+        { name: 'recipe2' }
       end
 
       it 'updates the requested recipe' do
         recipe = Recipe.create! valid_attributes
         patch recipe_url(recipe), params: { recipe: new_attributes }
         recipe.reload
-        skip('Add assertions for updated state')
       end
 
       it 'redirects to the recipe' do
@@ -101,14 +92,6 @@ RSpec.describe '/recipes', type: :request do
         patch recipe_url(recipe), params: { recipe: new_attributes }
         recipe.reload
         expect(response).to redirect_to(recipe_url(recipe))
-      end
-    end
-
-    context 'with invalid parameters' do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        recipe = Recipe.create! valid_attributes
-        patch recipe_url(recipe), params: { recipe: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

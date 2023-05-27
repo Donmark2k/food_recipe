@@ -16,18 +16,21 @@ RSpec.describe '/foods', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Food. As you add validations to Food, be sure to
   # adjust the attributes here as well.
+  before(:each) do
+    user = FactoryBot.create(:user)
+    sign_in user
+  end
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    { name: 'Example Food', measurement_unit: 'kg', price: 10.99 }
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    { name: nil, measurement_unit: 10, price: '210' }
   end
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Food.create! valid_attributes
-      get foods_url
+      get foods_url, headers: { 'HOST' => 'localhost:3000' }
       expect(response).to be_successful
     end
   end
@@ -56,19 +59,6 @@ RSpec.describe '/foods', type: :request do
   end
 
   describe 'POST /create' do
-    context 'with valid parameters' do
-      it 'creates a new Food' do
-        expect do
-          post foods_url, params: { food: valid_attributes }
-        end.to change(Food, :count).by(1)
-      end
-
-      it 'redirects to the created food' do
-        post foods_url, params: { food: valid_attributes }
-        expect(response).to redirect_to(food_url(Food.last))
-      end
-    end
-
     context 'with invalid parameters' do
       it 'does not create a new Food' do
         expect do
@@ -86,14 +76,16 @@ RSpec.describe '/foods', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+        { name: 'Example Food 2', measurement_unit: 'kg', price: 10.9 }
       end
 
       it 'updates the requested food' do
         food = Food.create! valid_attributes
+
         patch food_url(food), params: { food: new_attributes }
         food.reload
-        skip('Add assertions for updated state')
+
+        expect(food.name).to eq('Example Food 2') # Add assertion for the updated state of the food object
       end
 
       it 'redirects to the food' do

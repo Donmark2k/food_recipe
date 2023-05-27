@@ -1,13 +1,17 @@
 class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[show edit update destroy]
+  load_and_authorize_resource
 
   # GET /inventories or /inventories.json
   def index
-    @inventories = Inventory.all
+    @inventories = current_user.inventories
+    # @inventories = Inventory.all
   end
 
   # GET /inventories/1 or /inventories/1.json
-  def show; end
+  def show
+    @inventory_foods = @inventory.inventory_foods
+  end
 
   # GET /inventories/new
   def new
@@ -19,7 +23,7 @@ class InventoriesController < ApplicationController
 
   # POST /inventories or /inventories.json
   def create
-    @inventory = Inventory.new(inventory_params)
+    @inventory = Inventory.new(user: current_user, name: inventory_params[:name])
 
     respond_to do |format|
       if @inventory.save
@@ -53,6 +57,24 @@ class InventoriesController < ApplicationController
       format.html { redirect_to inventories_url, notice: 'Inventory was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def show_inventory_foods
+    # authorize! :test_method, @inventory
+
+    @foods = Food.order(created_at: :desc)
+    render 'add_new_food'
+  end
+
+  def add_food_item
+    puts 'add_food_item called'
+    @inventory = Inventory.find(params[:id])
+    quantity = params[:quantity]
+    @food = Food.find(params[:food_id])
+
+    @inventory.add_food_item(food: @food, quantity:)
+
+    redirect_to request.referrer, notice: 'Food was successfully added to inventory.'
   end
 
   private

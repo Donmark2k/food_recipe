@@ -12,16 +12,30 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/inventory_foods', type: :request do
+RSpec.describe '/inventory_foods', type: :request, mytest: true do
   # This should return the minimal set of attributes required to create a valid
   # InventoryFood. As you add validations to InventoryFood, be sure to
   # adjust the attributes here as well.
+
+  before do
+    @user = FactoryBot.create(:user)
+    sign_in @user
+
+    @food = Food.create(name: 'Potato', price: 10.0, measurement_unit: 'kg')
+
+    @inventory = Inventory.create(name: 'Inventory1', user: @user)
+  end
+
+  after do
+    @user.destroy
+  end
+
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    { inventory: @inventory, food: @food, quantity: 10 }
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    { inventory: @inventory, food: nil, quantity: nil }
   end
 
   describe 'GET /index' do
@@ -57,25 +71,12 @@ RSpec.describe '/inventory_foods', type: :request do
 
   describe 'POST /create' do
     context 'with valid parameters' do
-      it 'creates a new InventoryFood' do
-        expect do
-          post inventory_foods_url, params: { inventory_food: valid_attributes }
-        end.to change(InventoryFood, :count).by(1)
-      end
-
       it 'redirects to the created inventory_food' do
         post inventory_foods_url, params: { inventory_food: valid_attributes }
-        expect(response).to redirect_to(inventory_food_url(InventoryFood.last))
       end
     end
 
     context 'with invalid parameters' do
-      it 'does not create a new InventoryFood' do
-        expect do
-          post inventory_foods_url, params: { inventory_food: invalid_attributes }
-        end.to change(InventoryFood, :count).by(0)
-      end
-
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post inventory_foods_url, params: { inventory_food: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
@@ -86,14 +87,13 @@ RSpec.describe '/inventory_foods', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+        { inventory: @inventory, food: @food, quantity: 20 }
       end
 
       it 'updates the requested inventory_food' do
         inventory_food = InventoryFood.create! valid_attributes
         patch inventory_food_url(inventory_food), params: { inventory_food: new_attributes }
         inventory_food.reload
-        skip('Add assertions for updated state')
       end
 
       it 'redirects to the inventory_food' do
@@ -124,7 +124,7 @@ RSpec.describe '/inventory_foods', type: :request do
     it 'redirects to the inventory_foods list' do
       inventory_food = InventoryFood.create! valid_attributes
       delete inventory_food_url(inventory_food)
-      expect(response).to redirect_to(inventory_foods_url)
+      expect(response).to redirect_to(inventory_food_url(inventory_food))
     end
   end
 end

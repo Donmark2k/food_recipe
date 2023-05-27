@@ -1,15 +1,38 @@
 <div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
+  <div class="mx-auto w-full text-center">
+   
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
 
-    <%= render @inventory %>
+  <div class="flex justify-center">
+   <p class="my-5 text-center ">
+    <strong class="block font-bold text-3xl mb-1"><%= @inventory.name %></strong>
+  </p>
+  </div>
+  <div class="flex w-full justify-between">
+ <%= link_to 'Back to Inventories', inventories_path , class: "mt-2 rounded-lg py-3 px-5 font-medium w-fit float-left  bg-white  text-black block" %>
 
-    <%= link_to 'Edit this inventory', edit_inventory_path(@inventory), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this inventory', inventory_path(@inventory), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+ <%= link_to 'Add New Food', show_inventory_foods_path, class: "mt-2 rounded-lg py-3 px-5 font-medium w-fit float-right ml-auto   bg-blue-600 text-white block" %>
+  </div>
+
+
+        <hr class="border-2 my-4 border-black w-full clear-both" />
+    
+    <% unless @inventory_foods.empty? %>
+    <%=render partial:'show_inventory_foods', locals:{inventory_foods:@inventory_foods}  %>
+    <%else%>
+    <p class="py-2 px-3 mb-5 font-medium " id="notice">No foods in this inventory</p>
+    <% end %>
+    <%# = link_to 'Edit this inventory', edit_inventory_path(@inventory), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+   
+    <div class=" mr-auto text-left">
+   
+      <%= button_to 'Destroy this inventory', inventory_path(@inventory), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-rose-500  font-medium" %>
     </div>
-    <%= link_to 'Back to inventories', inventories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+    <%# = link_to 'Back to inventories', inventories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+
   </div>
 </div>

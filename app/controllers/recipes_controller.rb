@@ -1,14 +1,27 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
+  skip_before_action :verify_authenticity_token
   before_action :set_recipe, only: %i[show edit update destroy]
+  load_and_authorize_resource
+  load_and_authorize_resource
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.all
+    # @recipes = Recipe.all()
+    @public_recipes = Recipe.where(public: true)
+    @user_recipes = []
+    @user_recipes = Recipe.where(user_id: current_user.id, public: false) unless current_user.nil?
+    @recipes = @public_recipes + @user_recipes
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show; end
+
+  def show
+    @recipe_foods = @recipe.recipe_foods
+    @inventories = Inventory.all
+
+    @inventory_names = @inventories.map(&:name)
+  end
 
   # GET /recipes/new
   def new
@@ -20,6 +33,8 @@ class RecipesController < ApplicationController
 
   # POST /recipes or /recipes.json
   def create
+    recipe_params[:user] = current_user
+    recipe_params[:user] = current_user
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
 
@@ -57,6 +72,43 @@ class RecipesController < ApplicationController
     end
   end
 
+  def toggle_public
+    # puts "%%%"*100
+    @recipe = Recipe.find(params[:id])
+    @recipe.toggle!(:public)
+    redirect_to recipe_url(@recipe)
+  end
+
+  def show_recipe_foods
+    @recipe = Recipe.find(params[:id])
+    @foods = Food.all
+    render 'add_food_to_recipe'
+  end
+
+  def add_food_item
+    puts 'add_food_item called'
+    @recipe = Recipe.find(params[:id])
+    quantity = params[:quantity]
+    @food = Food.find(params[:food_id])
+
+    @recipe.add_food_item(food: @food, quantity:)
+
+    redirect_to request.referrer, notice: 'Food was successfully added to Recipe.'
+  end
+
+  def generate_shopping_list
+    recipe_id = params[:recipe_id]
+    inventory_name = params[:select_option]
+    inventory_id = Inventory.find_by(name: inventory_name).id
+    url_params = {
+      recipe_id:,
+      inventory_id:
+    }
+
+    redirect_to shopping_list_path(url_params)
+    # redirect_to foods_path
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -67,5 +119,9 @@ class RecipesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def recipe_params
     params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
+  end
+
+  def url_params
+    params.permit(:recipe_id, :inventory_id)
   end
 end

@@ -1,0 +1,53 @@
+<h1 class="text-center text-3xl font-bold">Shopping List</h1>
+
+<div class='flex-col mx-auto text-lg my-4 font-semibold w-4/6 '>
+
+	<div class='flex  justify-between '>
+		<p>Amount of food to buy: <%=@shopping_list_foods.size %> </p>
+		<%# <p>Recipe: <%=@recipe.name %>
+		<p> Recipe:
+			<%=	link_to @recipe.name , recipe_path(@recipe) , class: "text-sky-600 underline" %>
+		</p>
+	</div>	
+	
+	<div class='flex justify-between '>
+		<p>Total Value of Food needed: <%=@total_value %> </p>
+		<p>Inventory:
+    	<%=	link_to @inventory.name , inventory_path(@inventory) , class: "text-sky-600 underline" %>
+		</p>
+
+	</div>
+	
+
+
+</div>
+
+<div class="mx-auto  w-4/6 my-4">
+<table class=" table-fixed w-full bg-teal-400 ">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Food</th>
+      <th class="px-4 py-2">Quantity</th>
+      <th class="px-2 py-2">price</th>
+    </tr>
+  </thead>
+  <tbody class='font-semibold text-lg'>
+    <% @shopping_list_foods.each do |food| %>
+      <tr>
+        <td class="border px-4 py-2 "><%= food.food.name %></td>
+        <td class="border px-4 py-2"><%= food.quantity %> <%= food.food.measurement_unit%> </td>
+        <td class="border px-2 text-right py-2">
+       <div class="inline-block ">
+					<%= food.quantity * food.food.price %>
+    </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+</div>
+
+
+```
