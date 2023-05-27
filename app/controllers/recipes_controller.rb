@@ -8,8 +8,10 @@ class RecipesController < ApplicationController
   def index
     # @recipes = Recipe.all()
     @public_recipes = Recipe.where(public: true)
+    @user_recipes = []
+    unless current_user.nil?
     @user_recipes = Recipe.where(user_id: current_user.id, public: false)
-
+    end
     @recipes = @public_recipes + @user_recipes
   end
 
