@@ -8,7 +8,9 @@ class RecipesController < ApplicationController
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show; end
+  def show
+    @recipe_foods = @recipe.recipe_foods
+  end
 
   # GET /recipes/new
   def new
@@ -56,6 +58,31 @@ class RecipesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def toggle_public
+    # puts "%%%"*100
+    @recipe = Recipe.find(params[:id])
+    @recipe.toggle!(:public)
+    redirect_to recipe_url(@recipe)
+  end
+
+  def show_recipe_foods
+    @recipe = Recipe.find(params[:id])
+    @foods = Food.all
+    render 'add_food_to_recipe'
+  end
+
+  def add_food_item
+    puts 'add_food_item called'
+    @recipe = Recipe.find(params[:id])
+    quantity = params[:quantity]
+    @food = Food.find(params[:food_id])
+
+    @recipe.add_food_item(food: @food, quantity:)
+
+    redirect_to request.referrer, notice: 'Food was successfully added to Recipe.'
+  end
+
 
   private
 
