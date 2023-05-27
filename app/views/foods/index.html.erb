@@ -9,6 +9,8 @@
   </div>
 
   <div id="foods" class="min-w-full">
-    <%= render @foods %>
+ 
+    <%= render partial:'food_table_display', locals:{foods:@foods} %>
+ 
   </div>
 </div>
