@@ -35,7 +35,7 @@ class RecipesController < ApplicationController
   def create
     recipe_params[:user] = current_user
     @recipe = Recipe.new(recipe_params)
-    
+
     @recipe.user = current_user
 
     respond_to do |format|
