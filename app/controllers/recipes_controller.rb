@@ -3,6 +3,7 @@ class RecipesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_recipe, only: %i[show edit update destroy]
   load_and_authorize_resource
+  load_and_authorize_resource
 
   # GET /recipes or /recipes.json
   def index
@@ -22,6 +23,12 @@ class RecipesController < ApplicationController
 
     @inventory_names = @inventories.map(&:name)
   end
+  def show
+    @recipe_foods = @recipe.recipe_foods
+    @inventories = Inventory.all
+
+    @inventory_names = @inventories.map(&:name)
+  end
 
   # GET /recipes/new
   def new
@@ -33,6 +40,7 @@ class RecipesController < ApplicationController
 
   # POST /recipes or /recipes.json
   def create
+    recipe_params[:user] = current_user
     recipe_params[:user] = current_user
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
