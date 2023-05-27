@@ -11,8 +11,8 @@ RSpec.describe 'Inventory', type: :feature do
     @inventory_food.save
   end
 
-  before(:each) do
-    visit '/'
+  before do
+    visit '/users/sign_in'
 
     fill_in 'email', with: @user.email
     fill_in 'password', with: @user.password

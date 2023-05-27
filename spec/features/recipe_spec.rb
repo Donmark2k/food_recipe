@@ -12,7 +12,7 @@ RSpec.describe 'Recipe', type: :feature do
   end
 
   before(:each) do
-    visit '/'
+    visit 'users/sign_in'
 
     fill_in 'email', with: @user.email
     fill_in 'password', with: @user.password

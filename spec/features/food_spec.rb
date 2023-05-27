@@ -5,10 +5,10 @@ RSpec.describe 'Food', type: :feature do
     @food = Food.create(name: 'Potato', price: 10.0, measurement_unit: 'kg')
   end
 
-  before(:each) do
+  before do
     @user = FactoryBot.create(:user)
 
-    visit '/'
+    visit 'users/sign_in'
 
     fill_in 'email', with: @user.email
     fill_in 'password', with: @user.password
