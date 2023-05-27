@@ -10,19 +10,12 @@ class RecipesController < ApplicationController
     # @recipes = Recipe.all()
     @public_recipes = Recipe.where(public: true)
     @user_recipes = []
-    unless current_user.nil?
-    @user_recipes = Recipe.where(user_id: current_user.id, public: false)
-    end
+    @user_recipes = Recipe.where(user_id: current_user.id, public: false) unless current_user.nil?
     @recipes = @public_recipes + @user_recipes
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show
-    @recipe_foods = @recipe.recipe_foods
-    @inventories = Inventory.all
 
-    @inventory_names = @inventories.map(&:name)
-  end
   def show
     @recipe_foods = @recipe.recipe_foods
     @inventories = Inventory.all

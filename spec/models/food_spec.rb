@@ -15,8 +15,9 @@ RSpec.describe Food, type: :model do
   end
   it 'is not valid without a price' do
     food = Food.new(price: nil)
-  it 'is not valid without a price' do
-    food = Food.new(price: nil)
-    expect(food).to_not be_valid
+    it 'is not valid without a price' do
+      food = Food.new(price: nil)
+      expect(food).to_not be_valid
+    end
   end
 end
