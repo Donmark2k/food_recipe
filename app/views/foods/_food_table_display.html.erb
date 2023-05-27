@@ -1,4 +1,4 @@
-<table class="w-4/6 bg-teal-300 mx-auto">
+<table class="w-4/6 mx-auto bg-teal-300">
   <thead>
     <tr>
       <th class="px-4 py-2">Food</th>
@@ -10,11 +10,11 @@
   <tbody>
     <% foods.each do |food| %>
       <tr>
-        <td class="border px-4 py-2"><%= food.name %></td>
-        <td class="border px-4 py-2"><%= food.measurement_unit %></td>
-        <td class="border px-4 py-2"><%= food.price %></td>
+        <td class="px-4 py-2 border"><%= food.name %></td>
+        <td class="px-4 py-2 border"><%= food.measurement_unit %></td>
+        <td class="px-4 py-2 border"><%= food.price %></td>
 
-        <td class="border px-4 py-2 text-center">
+        <td class="px-4 py-2 text-center border">
        <div class="inline-block ml-2">
       <%= button_to 'Remove',food_path(food), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>

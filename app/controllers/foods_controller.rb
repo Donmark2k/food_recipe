@@ -20,6 +20,9 @@ class FoodsController < ApplicationController
   # POST /foods or /foods.json
   # rubocop:disable Metrics/MethodLength
   def create
+    # food_params[:user] = current_user
+  
+  
     @food = Food.new(food_params)
     puts request.referer
 

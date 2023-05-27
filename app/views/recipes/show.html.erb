@@ -1,7 +1,7 @@
-<div class="mx-auto md:w-2/3 w-full flex">
+<div class="flex w-full mx-auto md:w-2/3">
   <div class="mx-auto">
     <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+      <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
     <% end %>
 
     <%= render partial:'recipe' ,locals:{recipe:@recipe, inventory_names:@inventory_names} %>
@@ -10,11 +10,15 @@
 
     <%= render partial:'recipe_foods_in_recipe', locals:{recipe_foods:@recipe_foods}%>
 
-
+    <% if can? :update, @recipe %>
     <%= link_to 'Edit this recipe', edit_recipe_path(@recipe), class: "mt-2 rounded-lg py-3 px-5 bg-orange-400 inline-block font-medium" %>
+    <%end%>
+    
+     <% if can? :destroy, @recipe %>
     <div class="inline-block ml-2">
       <%= button_to 'Delete this recipe', recipe_path(@recipe), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-rose-400 font-medium" %>
     </div>
+    <% end %>
     <%= link_to 'Back to recipes', recipes_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>

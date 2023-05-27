@@ -3,7 +3,7 @@ class InventoryFoodsController < ApplicationController
 
   # GET /inventory_foods or /inventory_foods.json
   def index
-    @inventory_foods = InventoryFood.all
+    @inventory_foods = current_user.inventory_foods.all
   end
 
   # GET /inventory_foods/1 or /inventory_foods/1.json
