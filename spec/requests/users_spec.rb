@@ -19,20 +19,19 @@ RSpec.describe '/users', type: :request do
   before do
     @user = FactoryBot.create(:user)
     sign_in @user
-  
   end
 
-  after  do 
+  after do
     @user.destroy
     User.destroy_all
   end
 
   let(:valid_attributes) do
-    {name:'User1', email:'user1@email.com', password:'123456'}
+    { name: 'User1', email: 'user1@email.com', password: '123456' }
   end
 
   let(:invalid_attributes) do
-      {name:nil, email:nil}
+    { name: nil, email: nil }
   end
 
   describe 'GET /index' do
@@ -68,22 +67,18 @@ RSpec.describe '/users', type: :request do
 
   describe 'POST /create' do
     context 'with valid parameters' do
-      
-      
       it 'redirects to the created user' do
         post users_url, params: { user: valid_attributes }
         expect(response).to redirect_to('/')
       end
     end
-
   end
 
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        {name:'User3'}
+        { name: 'User3' }
       end
-
 
       it 'redirects to the user' do
         user = User.create! valid_attributes

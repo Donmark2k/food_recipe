@@ -12,7 +12,7 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/recipes', type: :request   do
+RSpec.describe '/recipes', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Recipe. As you add validations to Recipe, be sure to
   # adjust the attributes here as well.
@@ -22,16 +22,16 @@ RSpec.describe '/recipes', type: :request   do
     sign_in @user
   end
 
-  after  do
+  after do
     @user.destroy
   end
 
   let(:valid_attributes) do
-   {name: 'Recipe1', user: @user, preparation_time: 10, description: 'Recipe1',cooking_time:10, public: true}
+    { name: 'Recip1', user: @user, preparation_time: 10, description: 'Ree1', cooking_time: 10, public: true }
   end
 
   let(:invalid_attributes) do
-   {name:'recipe2'}
+    { name: 'recipe2' }
   end
 
   describe 'GET /index' do
@@ -66,10 +66,6 @@ RSpec.describe '/recipes', type: :request   do
   end
 
   describe 'POST /create' do
-    context 'with valid parameters' do
- 
-    end
-
     context 'with invalid parameters' do
       it 'does not create a new Recipe' do
         expect do
@@ -82,7 +78,7 @@ RSpec.describe '/recipes', type: :request   do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        {name:'recipe2'}
+        { name: 'recipe2' }
       end
 
       it 'updates the requested recipe' do
@@ -98,8 +94,6 @@ RSpec.describe '/recipes', type: :request   do
         expect(response).to redirect_to(recipe_url(recipe))
       end
     end
-
-
   end
 
   describe 'DELETE /destroy' do

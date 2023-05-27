@@ -37,11 +37,10 @@ end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.include Devise::Test::IntegrationHelpers, type: :request
-config.include Devise::Test::ControllerHelpers, type: :controller
-config.include Devise::Test::IntegrationHelpers, type: :feature
-config.include FactoryBot::Syntax::Methods
-config.include Warden::Test::Helpers
-
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include FactoryBot::Syntax::Methods
+  config.include Warden::Test::Helpers
 
   config.fixture_path = "#{Rails.root}/spec/fixtures"
 
@@ -73,20 +72,18 @@ config.include Warden::Test::Helpers
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   Capybara.register_driver :selenium_chrome_headless do |app|
-
     options = Selenium::WebDriver::Chrome::Options.new
-    
+
     options.add_argument('--headless')
-    
+
     options.add_argument('--no-sandbox')
-    
+
     options.add_argument('--disable-dev-shm-usage')
-    
+
     Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
-    
-    end
-    
-    Capybara.javascript_driver = :selenium_chrome_headless
-    
-    Capybara.server = :puma
+  end
+
+  Capybara.javascript_driver = :selenium_chrome_headless
+
+  Capybara.server = :puma
 end

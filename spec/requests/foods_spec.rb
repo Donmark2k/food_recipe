@@ -19,7 +19,6 @@ RSpec.describe '/foods', type: :request do
   before(:each) do
     user = FactoryBot.create(:user)
     sign_in user
-  
   end
   let(:valid_attributes) do
     { name: 'Example Food', measurement_unit: 'kg', price: 10.99 }
@@ -60,7 +59,6 @@ RSpec.describe '/foods', type: :request do
   end
 
   describe 'POST /create' do
-
     context 'with invalid parameters' do
       it 'does not create a new Food' do
         expect do
@@ -83,13 +81,12 @@ RSpec.describe '/foods', type: :request do
 
       it 'updates the requested food' do
         food = Food.create! valid_attributes
-      
+
         patch food_url(food), params: { food: new_attributes }
         food.reload
-      
+
         expect(food.name).to eq('Example Food 2') # Add assertion for the updated state of the food object
       end
-      
 
       it 'redirects to the food' do
         food = Food.create! valid_attributes

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Food, type: :model do
-
   it 'is valid with valid attributes' do
     expect(Food.new(name: 'Anything', measurement_unit: 'kg', price: 250.0)).to be_valid
   end

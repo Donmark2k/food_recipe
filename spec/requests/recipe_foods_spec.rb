@@ -21,24 +21,22 @@ RSpec.describe '/recipe_foods', type: :request do
     @user = FactoryBot.create(:user)
     sign_in @user
 
-
     @food = Food.create(name: 'Potato', price: 10.0, measurement_unit: 'kg')
 
-		@recipe = Recipe.create(name: 'Recipe1', user: @user, preparation_time: 10, description: 'Recipe1',cooking_time:10, public: true)
-
+    @recipe = Recipe.create(name: 'Recipe1', user: @user, preparation_time: 10, description: 'Rece1', cooking_time: 10,
+                            public: true)
   end
 
-  after  do
+  after do
     @user.destroy
   end
 
-
   let(:valid_attributes) do
-    { recipe: @recipe, food: @food, quantity: 10}
+    { recipe: @recipe, food: @food, quantity: 10 }
   end
 
   let(:invalid_attributes) do
-   { recipe: @recipe, food: nil, quantity: nil}
+    { recipe: @recipe, food: nil, quantity: nil }
   end
 
   describe 'GET /index' do
@@ -73,11 +71,7 @@ RSpec.describe '/recipe_foods', type: :request do
   end
 
   describe 'POST /create' do
-
-
     context 'with invalid parameters' do
-
-
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post recipe_foods_url, params: { recipe_food: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
@@ -88,7 +82,7 @@ RSpec.describe '/recipe_foods', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-          { recipe: @recipe, food: @food, quantity: 20}
+        { recipe: @recipe, food: @food, quantity: 20 }
       end
 
       it 'updates the requested recipe_food' do
@@ -113,6 +107,4 @@ RSpec.describe '/recipe_foods', type: :request do
       end
     end
   end
-
-
 end
