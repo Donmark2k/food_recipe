@@ -61,15 +61,12 @@ class InventoriesController < ApplicationController
 
   def show_inventory_foods
     # authorize! :test_method, @inventory
-    puts '==================='
-    puts 'test_method called'
+
     @foods = Food.order(created_at: :desc)
     render 'add_new_food'
   end
 
   def add_food_item
-    # authorize! :add_food_item, @inventory
-    puts '==================='
     puts 'add_food_item called'
     @inventory = Inventory.find(params[:id])
     quantity = params[:quantity]
