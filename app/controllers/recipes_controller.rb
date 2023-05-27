@@ -2,10 +2,15 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
   skip_before_action :verify_authenticity_token
   before_action :set_recipe, only: %i[show edit update destroy]
+  load_and_authorize_resource
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.all
+    # @recipes = Recipe.all()
+    @public_recipes = Recipe.where(public: true)
+    @user_recipes = Recipe.where(user_id: current_user.id, public: false)
+
+    @recipes = @public_recipes + @user_recipes
   end
 
   # GET /recipes/1 or /recipes/1.json
@@ -26,6 +31,7 @@ class RecipesController < ApplicationController
 
   # POST /recipes or /recipes.json
   def create
+    recipe_params[:user] = current_user
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
 
@@ -88,18 +94,18 @@ class RecipesController < ApplicationController
   end
 
   def generate_shopping_list
-    recipe_id =params[:recipe_id]
+    recipe_id = params[:recipe_id]
     inventory_name = params[:select_option]
     inventory_id = Inventory.find_by(name: inventory_name).id
     url_params = {
-      recipe_id: recipe_id,
-      inventory_id: inventory_id
+      recipe_id:,
+      inventory_id:
     }
 
-   redirect_to shopping_list_path(url_params)
-  # redirect_to foods_path
-  
+    redirect_to shopping_list_path(url_params)
+    # redirect_to foods_path
   end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -110,7 +116,6 @@ class RecipesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def recipe_params
     params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
-    
   end
 
   def url_params

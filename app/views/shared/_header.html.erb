@@ -1,18 +1,23 @@
-<div>
+<div class="flex justify-between px-3 items-center mb-4 py-4 bg-slate-300">
 
-	<nav>
+	<nav class='flex space-x-10 font-bold text-2xl text-blue-600'>
+
+		<p><%= link_to 'Inventories', inventories_path  %></p>
+		<p><%= link_to 'Foods', foods_path  %></p>
+		<p>	<%= link_to 'Recipes', recipes_path  %></p>
+		
 	
-		<%= link_to 'Inventories', inventories_path  %>
-		<%= link_to 'Foods', foods_path  %>
-		<%= link_to 'Recipes', recipes_path  %>
 		
 	
 	</nav>
 
 
-	<%if user_signed_in?%>
-		<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-	<%else%>
-		<%= link_to "Sign In", new_user_session_path %>
-	<%end%>	
+	<p class=" rounded-lg flex py-2 px-4 bg-red-200 font-semibold text-red-800">
+		<%if user_signed_in?%>
+		 <%= current_user.name %> -> 
+			<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+		<%else%>
+			<%= link_to "Sign In", new_user_session_path %>
+		<%end%>
+	</p>
 </div>
