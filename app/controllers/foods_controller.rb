@@ -18,6 +18,7 @@ class FoodsController < ApplicationController
   def edit; end
 
   # POST /foods or /foods.json
+  # rubocop:disable Metrics/MethodLength
   def create
     @food = Food.new(food_params)
     puts request.referer
@@ -48,6 +49,7 @@ class FoodsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /foods/1 or /foods/1.json
   def update

@@ -1,10 +1,9 @@
 class ShoppingListController < ApplicationController
- 
- 
+  # rubocop:disable Metrics/MethodLength
   def make_list
-    id =  params[:recipe_id]
+    id = params[:recipe_id]
     @recipe = Recipe.find(id)
-    @recipe_foods = RecipeFood.where(recipe_id:id)
+    @recipe_foods = RecipeFood.where(recipe_id: id)
 
     inventory_id = params[:inventory_id]
     @inventory = Inventory.find(inventory_id)
@@ -31,6 +30,5 @@ class ShoppingListController < ApplicationController
 
     render 'show'
   end
-
-
+  # rubocop:enable Metrics/MethodLength
 end
