@@ -10,7 +10,7 @@ class InventoriesController < ApplicationController
 
   # GET /inventories/1 or /inventories/1.json
   def show
-    @inventory_foods = @inventory.inventory_foods
+    @inventory_foods = @inventory.inventory_foods.includes(:food)
   end
 
   # GET /inventories/new

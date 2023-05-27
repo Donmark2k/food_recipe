@@ -17,7 +17,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1 or /recipes/1.json
 
   def show
-    @recipe_foods = @recipe.recipe_foods
+    @recipe_foods = @recipe.recipe_foods.includes(:food)
     @inventories = Inventory.all
 
     @inventory_names = @inventories.map(&:name)
