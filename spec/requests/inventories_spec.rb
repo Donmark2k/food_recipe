@@ -19,7 +19,6 @@ RSpec.describe '/inventories', type: :request do
   
   before(:each) do
     user = FactoryBot.create(:user)
-    puts user.inspect
     sign_in user
 
   end
