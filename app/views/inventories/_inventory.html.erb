@@ -1,7 +1,10 @@
-<div id="<%= dom_id inventory %>"  class='border-2 border-slate-400 py-2'>
+<div id="<%= dom_id inventory %>"  class='border-2 border-slate-400 my-4 py-2'>
   
   <p class="my-5 ">
-    <strong class="block font-bold text-3xl mb-1"><%= inventory.name %></strong>
+
+    <strong class="block font-bold text-3xl mb-1">
+     <%= link_to inventory.name, inventory, class: " py-3 px-5  inline-block font-medium" %>
+     </strong>
     
   </p>
 
