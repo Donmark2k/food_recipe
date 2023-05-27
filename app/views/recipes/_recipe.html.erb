@@ -1,0 +1,85 @@
+
+
+
+<div id="" class='w-full p-2 rounded-md bg-rose-300 ' >
+  <p class="my-5 text-2xl font-bold text-center">
+    <%# <strong class="block mb-1 font-medium">Name:</strong> %>
+    <%= recipe.name %>
+  </p>
+
+  <div  class= 'grid grid-cols-3'> 
+  <div class='col-span-2'>
+  <p class="my-5">
+    <strong class="block mb-1 font-medium">Preparation time: <%= recipe.preparation_time %> </strong>
+  </p>
+
+  <p class="my-5">
+    <strong class="block mb-1 font-medium">Cooking time:
+    <%= recipe.cooking_time %>
+    </strong>
+  </p>
+
+  <p class="my-5">
+    <strong class="block mb-1 font-medium">Steps:</strong>
+    <%= recipe.description %>
+  </p>
+
+  </div>
+
+  <%# <p class="my-5 bg-red-300 "> %>
+    <%# <strong class="block mb-1 font-medium">Public:</strong>
+    <%= recipe.public %> 
+
+    <%=form_with(url: toggle_public_path(), method: :post) do |form| %>
+    <b>Public:</b>
+    <label class="relative inline-flex items-center cursor-pointer">
+        <%= form.check_box :enabled, checked: recipe.public, class: "sr-only peer",  onchange: "this.form.submit()" %>
+        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+    </label>
+   
+    <% end %>
+ 
+ 
+  <%# </p> %>
+
+  </div>
+
+
+<div class='flex justify-between'>
+  
+       <%# <%= link_to "Generate Shopping List", recipe, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %> 
+
+
+       <button id="openModalButton" class='px-5 py-3 mr-2 font-semibold rounded-lg btn bg-emerald-500 btn-primary'>
+       Generate Shopping List
+       </button>
+
+ 
+        <%= link_to "Add Ingredient", show_list_of_foods_path(recipe) , class: "rounded-lg py-3 px-5 bg-blue-500 inline-block font-medium" %>
+</div>
+
+
+</div>
+
+
+
+<div id="myModal" class="fixed inset-0 z-50 items-center justify-center hidden">
+  <div class="absolute inset-0 bg-gray-900 opacity-50 modal-overlay"></div>
+  <div class="z-50 w-1/2 mx-auto bg-white rounded shadow-lg modal-container">
+    <!-- Modal content goes here -->
+    <div class="p-4 modal-content">
+      <h2 class="mb-4 text-lg font-bold">Modal Title</h2>
+
+ <%= form_with(url: generate_shopping_list_path(), method: :post) do |form| %>
+  <%= form.hidden_field :recipe_id, value: recipe.id %>
+  <%= form.label :select_option, 'Select Option:' %>
+  <%= form.select :select_option, options_for_select(inventory_names) %>
+  <%= form.submit 'Generate', class: 'btn rounded-lg font-semibold py-3 px-5 bg-emerald-500 btn-primary' %>
+<% end %>
+    </div>
+    <div class="p-4 bg-gray-100 modal-footer">
+      <!-- Modal footer content goes here -->
+      <button type="button" id="closeModalButton" class="px-5 py-3 font-semibold rounded-lg btn bg-rose-300 btn-primary">Close</button>
+    </div>
+  </div>
+</div>
