@@ -1,11 +1,15 @@
-<div class=' mx-auto w-fit h-[100px]'>
-<%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
-<% end %>
+<div class=' mx-auto w-fit h-[100px] mt-4 '>
+<p class="mx-auto w-fit text-lg my-4 p-1 rounded-lg text-black-600 font-semibold my-2">
+  <%- if controller_name != 'sessions' %>
+    <%= link_to "Log in", new_session_path(resource_name) %><br />
+  <% end %>
+</p>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) , class:' ' %><br />
-<% end %>
+<p class="mx-auto w-fit ring-4 ring-slate-600 text-lg my-4 p-1 rounded-lg text-black-600 font-semibold ">
+  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+    <%= link_to "Sign up", new_registration_path(resource_name) , class:' ' %><br />
+  <% end %>
+</p>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <%= link_to "Forgot your password?", new_password_path(resource_name), class:'' %><br />
