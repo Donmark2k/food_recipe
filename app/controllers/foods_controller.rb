@@ -30,15 +30,13 @@ class FoodsController < ApplicationController
             redirect_to inventory_specific_food_path(inventory_id:, id: @food.id),
                         notice: 'Food was successfully created.'
           end
-        
+
         elsif request.referer.include? 'recipes'
           recipe_id = params[:recipe_id] || extract_recipe_id
-            format.html do
-              redirect_to recipe_specific_food_path(recipe_id:, id: @food.id),
-                          notice: 'Food was successfully created.'
-            end
-
-
+          format.html do
+            redirect_to recipe_specific_food_path(recipe_id:, id: @food.id),
+                        notice: 'Food was successfully created.'
+          end
 
         else
           format.html { redirect_to food_url(@food), notice: 'Food was successfully created.' }
@@ -89,7 +87,7 @@ class FoodsController < ApplicationController
   def extract_inventory_id
     referer_path = URI(request.referer).path
     Rails.application.routes.recognize_path(referer_path)[:inventory_id]
-  end 
+  end
 
   def extract_recipe_id
     referer_path = URI(request.referer).path

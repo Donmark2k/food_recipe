@@ -4,8 +4,9 @@
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
 
-    <%= render @recipe %>
+    <%= render partial:'recipe' ,locals:{recipe:@recipe, inventory_names:@inventory_names} %>
 
+      <p class="py-2"></p>
 
     <%= render partial:'recipe_foods_in_recipe', locals:{recipe_foods:@recipe_foods}%>
 

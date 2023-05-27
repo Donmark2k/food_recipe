@@ -9,13 +9,15 @@ Rails.application.routes.draw do
 
   post '/inventories/:id/add_food_item', to: 'inventories#add_food_item', as: 'add_food_item'
   
-  get '/shopping_list', to: 'shopping_list#show', as: 'shopping_list'
+    get '/shopping_list/', to: 'shopping_list#make_list', as: 'shopping_list'
  
     post '/recipes/:id/', to: 'recipes#toggle_public', as: 'toggle_public'
 
     get '/recipes/:id/show_list_of_foods', to: 'recipes#show_recipe_foods', as: 'show_list_of_foods'
 
     post '/recipes/:id/add_food_item', to: 'recipes#add_food_item', as: 'add_recipe_food_item'
+
+    post 'recipes/:id/generate_shopping_list', to: 'recipes#generate_shopping_list', as: 'generate_shopping_list'
 
   resources :recipes do
     resources :foods, only: [:new, :create, :show], as: 'specific_foods'
