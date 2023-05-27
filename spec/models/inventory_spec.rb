@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Inventory, type: :model do
+RSpec.describe InventoryFood, type: :model do
   subject do
     Inventory.new(
       name: 'Beans',
