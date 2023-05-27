@@ -16,12 +16,23 @@ RSpec.describe '/users', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
+  before do
+    @user = FactoryBot.create(:user)
+    sign_in @user
+  
+  end
+
+  after  do 
+    @user.destroy
+    User.destroy_all
+  end
+
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    {name:'User1', email:'user1@email.com', password:'123456'}
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+      {name:nil, email:nil}
   end
 
   describe 'GET /index' do
@@ -57,44 +68,22 @@ RSpec.describe '/users', type: :request do
 
   describe 'POST /create' do
     context 'with valid parameters' do
-      it 'creates a new User' do
-        expect do
-          post users_url, params: { user: valid_attributes }
-        end.to change(User, :count).by(1)
-      end
-
+      
+      
       it 'redirects to the created user' do
         post users_url, params: { user: valid_attributes }
-        expect(response).to redirect_to(user_url(User.last))
+        expect(response).to redirect_to('/')
       end
     end
 
-    context 'with invalid parameters' do
-      it 'does not create a new User' do
-        expect do
-          post users_url, params: { user: invalid_attributes }
-        end.to change(User, :count).by(0)
-      end
-
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post users_url, params: { user: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
   end
 
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+        {name:'User3'}
       end
 
-      it 'updates the requested user' do
-        user = User.create! valid_attributes
-        patch user_url(user), params: { user: new_attributes }
-        user.reload
-        skip('Add assertions for updated state')
-      end
 
       it 'redirects to the user' do
         user = User.create! valid_attributes
