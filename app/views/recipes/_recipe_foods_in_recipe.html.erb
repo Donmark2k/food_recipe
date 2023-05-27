@@ -1,0 +1,25 @@
+<table class="min-w-full">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Food</th>
+      <th class="px-4 py-2">Quantity</th>
+			<th class="px-4 py-2" >Value</th>
+      <th class="px-4 py-2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% recipe_foods.each do |recipe_food| %>
+      <tr>
+        <td class="border px-4 py-2"><%= recipe_food.food.name %></td>
+        <td class="border px-4 py-2"><%= recipe_food.quantity %></td>
+				<td class="border px-4 py-2"><%= recipe_food.food.price * recipe_food.quantity %></td>
+        <td class="border px-4 py-2">
+       <div class=" flex space-x-2 ml-2">
+			   <%= button_to 'Modify', edit_recipe_food_path(recipe_food), method: :get, class: "mt-2 text-orange-600 py-3 px-5 font-medium" %>
+      <%= button_to 'Remove', recipe_food_path(recipe_food), method: :delete, class: "mt-2 py-3 text-rose-600 px-5  font-medium" %>
+    </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

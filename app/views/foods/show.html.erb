@@ -19,8 +19,17 @@
 
     <%= link_to 'Back to inventory', show_inventory_foods_path(id:inventory_id) , class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 
+    <%elsif request.fullpath.to_s.include?('recipes')%>
+
+      <%
+    referer_path = URI(request.referer).path
+    recipe_id = Rails.application.routes.recognize_path(referer_path)[:recipe_id] %>
+
+    <%= link_to 'Back to Recipes', show_list_of_foods_path(id:recipe_id), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
     <%else%>
     <%= link_to 'Back to foods', foods_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+ 
     <%end%>
  
   </div>
