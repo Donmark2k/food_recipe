@@ -12,7 +12,7 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/recipes', type: :request   do
+RSpec.describe '/recipes', type: :request, mytest:true   do
   # This should return the minimal set of attributes required to create a valid
   # Recipe. As you add validations to Recipe, be sure to
   # adjust the attributes here as well.
@@ -27,11 +27,11 @@ RSpec.describe '/recipes', type: :request   do
   end
 
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+   {name: 'Recipe1', user: @user, preparation_time: 10, description: 'Recipe1',cooking_time:10, public: true}
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+   {name:'recipe2'}
   end
 
   describe 'GET /index' do
