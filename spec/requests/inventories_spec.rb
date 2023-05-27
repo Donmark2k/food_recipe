@@ -16,15 +16,12 @@ RSpec.describe '/inventories', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Inventory. As you add validations to Inventory, be sure to
   # adjust the attributes here as well.
-  
+
   before(:each) do
     user = FactoryBot.create(:user)
     sign_in user
-
   end
 
-   
-  
   let(:valid_attributes) do
     { user: User.first, name: 'Example Food' }
   end
@@ -97,20 +94,20 @@ RSpec.describe '/inventories', type: :request do
       let(:new_attributes) do
         { name: 'New Inventory Name' } # Replace with actual valid attributes for updating the inventory
       end
-    
+
       it 'updates the requested inventory' do
         inventory = Inventory.create! valid_attributes
         patch inventory_url(inventory), params: { inventory: new_attributes }
         inventory.reload
-    
+
         expect(inventory.name).to eq('New Inventory Name') # Add assertion for the updated state of the inventory
       end
-    
+
       it 'redirects to the inventory' do
         inventory = Inventory.create! valid_attributes
         patch inventory_url(inventory), params: { inventory: new_attributes }
         inventory.reload
-    
+
         expect(response).to redirect_to(inventory_url(inventory))
       end
     end

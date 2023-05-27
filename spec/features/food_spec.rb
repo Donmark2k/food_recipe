@@ -1,61 +1,49 @@
 require 'rails_helper'
 
+RSpec.describe 'Food', type: :feature do
+  before(:all) do
+    @food = Food.create(name: 'Potato', price: 10.0, measurement_unit: 'kg')
+  end
 
+  before(:each) do
+    @user = FactoryBot.create(:user)
 
+    visit '/'
 
-RSpec.describe 'Food', type: :feature  do
-	
-	before(:all) do
-		@food = Food.create(name: 'Potato', price: 10.0, measurement_unit: 'kg')
-	end
+    fill_in 'email', with: @user.email
+    fill_in 'password', with: @user.password
 
-	before(:each) do
-		 @user = FactoryBot.create(:user)
-		 
-		 visit '/'
+    click_on 'Log in'
+  end
 
-		 fill_in 'email', with: @user.email
-		 fill_in 'password', with: @user.password
-		
-		 click_on 'Log in'
-		
-	end
-	
-	after(:all) do
-		User.destroy_all
-		Food.destroy_all
-	end
+  after(:all) do
+    User.destroy_all
+    Food.destroy_all
+  end
 
+  describe 'index page' do
+    it 'shows the foods' do
+      visit '/foods'
 
-	describe 'index page' do
-		it 'shows the foods' do
+      expect(page).to have_content('Food')
+    end
 
-			visit '/foods'
+    it 'shows the details' do
+      visit '/foods'
 
-			expect(page).to have_content('Food')
-		end
+      expect(page).to have_content('Potato')
+    end
 
+    it 'shows the foods contents' do
+      visit '/foods'
 
+      expect(page).to have_content('10.0')
+    end
 
-		it 'shows the details' do
-			visit '/foods'
+    it 'shows food measurement_units' do
+      visit '/foods'
 
-			expect(page).to have_content('Potato')
-		end
-
-		it 'shows the foods contents' do
-
-			visit '/foods'
-
-			expect(page).to have_content('10.0')
-		end
-
-
-		it 'shows food measurement_units' do
-			visit '/foods'
-
-			expect(page).to have_content('kg')
-		end
-		
-	end
+      expect(page).to have_content('kg')
+    end
+  end
 end
