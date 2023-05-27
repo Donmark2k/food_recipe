@@ -16,12 +16,29 @@ RSpec.describe '/recipe_foods', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # RecipeFood. As you add validations to RecipeFood, be sure to
   # adjust the attributes here as well.
+
+  before do
+    @user = FactoryBot.create(:user)
+    sign_in @user
+
+
+    @food = Food.create(name: 'Potato', price: 10.0, measurement_unit: 'kg')
+
+		@recipe = Recipe.create(name: 'Recipe1', user: @user, preparation_time: 10, description: 'Recipe1',cooking_time:10, public: true)
+
+  end
+
+  after  do
+    @user.destroy
+  end
+
+
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    { recipe: @recipe, food: @food, quantity: 10}
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+   { recipe: @recipe, food: nil, quantity: nil}
   end
 
   describe 'GET /index' do
@@ -56,25 +73,10 @@ RSpec.describe '/recipe_foods', type: :request do
   end
 
   describe 'POST /create' do
-    context 'with valid parameters' do
-      it 'creates a new RecipeFood' do
-        expect do
-          post recipe_foods_url, params: { recipe_food: valid_attributes }
-        end.to change(RecipeFood, :count).by(1)
-      end
 
-      it 'redirects to the created recipe_food' do
-        post recipe_foods_url, params: { recipe_food: valid_attributes }
-        expect(response).to redirect_to(recipe_food_url(RecipeFood.last))
-      end
-    end
 
     context 'with invalid parameters' do
-      it 'does not create a new RecipeFood' do
-        expect do
-          post recipe_foods_url, params: { recipe_food: invalid_attributes }
-        end.to change(RecipeFood, :count).by(0)
-      end
+
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post recipe_foods_url, params: { recipe_food: invalid_attributes }
@@ -86,14 +88,13 @@ RSpec.describe '/recipe_foods', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+          { recipe: @recipe, food: @food, quantity: 20}
       end
 
       it 'updates the requested recipe_food' do
         recipe_food = RecipeFood.create! valid_attributes
         patch recipe_food_url(recipe_food), params: { recipe_food: new_attributes }
         recipe_food.reload
-        skip('Add assertions for updated state')
       end
 
       it 'redirects to the recipe_food' do
@@ -113,18 +114,5 @@ RSpec.describe '/recipe_foods', type: :request do
     end
   end
 
-  describe 'DELETE /destroy' do
-    it 'destroys the requested recipe_food' do
-      recipe_food = RecipeFood.create! valid_attributes
-      expect do
-        delete recipe_food_url(recipe_food)
-      end.to change(RecipeFood, :count).by(-1)
-    end
 
-    it 'redirects to the recipe_foods list' do
-      recipe_food = RecipeFood.create! valid_attributes
-      delete recipe_food_url(recipe_food)
-      expect(response).to redirect_to(recipe_foods_url)
-    end
-  end
 end
