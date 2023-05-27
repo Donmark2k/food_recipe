@@ -1,0 +1,25 @@
+<table class="w-4/6 bg-teal-300 mx-auto">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Food</th>
+      <th class="px-4 py-2">Meausrement-Unit</th>
+      <th class="px-4 py-2">Unit Price</th>
+      <th class="px-4 py-2">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% foods.each do |food| %>
+      <tr>
+        <td class="border px-4 py-2"><%= food.name %></td>
+        <td class="border px-4 py-2"><%= food.measurement_unit %></td>
+        <td class="border px-4 py-2"><%= food.price %></td>
+
+        <td class="border px-4 py-2">
+       <div class="inline-block ml-2">
+      <%= button_to 'Remove',food_path(food), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

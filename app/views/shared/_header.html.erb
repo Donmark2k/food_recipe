@@ -1,8 +1,18 @@
 <div>
 
+	<nav>
+	
+		<%= link_to 'Inventories', inventories_path  %>
+		<%= link_to 'Foods', foods_path  %>
+		<%= link_to 'Recipes', recipes_path  %>
+		
+	
+	</nav>
+
+
 	<%if user_signed_in?%>
 		<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-	else
+	<%else%>
 		<%= link_to "Sign In", new_user_session_path %>
 	<%end%>	
 </div>
