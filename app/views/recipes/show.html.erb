@@ -1,24 +1,12 @@
-<div class="mx-auto w-full flex">
+<div class="mx-auto md:w-2/3 w-full flex">
   <div class="mx-auto">
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
-    <h1 class="text-2xl">
-    <%= @recipe.name %>
-  </h1>
 
-  <div class="flex">
-    
-    <div>
-    <p class="my-5 flex">
-    <strong class="block font-medium mb-1">Preparation time:</strong>
-    <%= @recipe.preparation_time %>
-    <% if @recipe.preparation_time > 0 %>
-  hours
-  <%else%>
-  hour
-<% end %>
-  </p>
+    <%= render partial:'recipe' ,locals:{recipe:@recipe, inventory_names:@inventory_names} %>
+
+      <p class="py-2"></p>
 
     <%= render partial:'recipe_foods_in_recipe', locals:{recipe_foods:@recipe_foods}%>
 
