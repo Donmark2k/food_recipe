@@ -15,8 +15,8 @@ class Ability
       can :update, :all, user_id: user.id
       can :destroy, :all, user_id: user.id
       can :show_inventory_foods, Inventory, user_id: user.id
-      can :add_food_item, Inventory, user_id: user.id    
-      
+      can :add_food_item, Inventory, user_id: user.id
+
       can :show_recipe_foods, Recipe, user_id: user.id
       can :add_food_item, Recipe, user_id: user.id
     end

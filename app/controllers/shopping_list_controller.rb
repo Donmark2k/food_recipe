@@ -1,9 +1,13 @@
 class ShoppingListController < ApplicationController
-  def show
-    @recipe = Recipe.find(recipe_id: params[:recipe_id])
-    @recipe_foods = RecipeFood.where(recipe_id:)
+ 
+ 
+  def make_list
+    id =  params[:recipe_id]
+    @recipe = Recipe.find(id)
+    @recipe_foods = RecipeFood.where(recipe_id:id)
 
-    @inventory = Inventory.find(inventory_id: params[:inventory_id])
+    inventory_id = params[:inventory_id]
+    @inventory = Inventory.find(inventory_id)
     @inventory_foods = InventoryFood.where(inventory_id:)
 
     @shopping_list_foods = []
@@ -24,5 +28,9 @@ class ShoppingListController < ApplicationController
     @total_value = @shopping_list_foods.sum do |food|
       food.food.price * food.quantity
     end
+
+    render 'show'
   end
+
+
 end

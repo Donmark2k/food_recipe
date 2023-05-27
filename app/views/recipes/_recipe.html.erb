@@ -11,4 +11,31 @@
     <%= recipe.description %>
   </p>
 </div>
-<%end%>
+
+
+</div>
+
+
+
+<div id="myModal" class="fixed inset-0 items-center justify-center z-50 hidden">
+  <div class="modal-overlay absolute inset-0 bg-gray-900 opacity-50"></div>
+  <div class="modal-container bg-white w-1/2 mx-auto rounded shadow-lg z-50">
+    <!-- Modal content goes here -->
+    <div class="modal-content p-4">
+      <h2 class="text-lg font-bold mb-4">Modal Title</h2>
+
+ <%= form_with(url: generate_shopping_list_path(), method: :post) do |form| %>
+  <%= form.hidden_field :recipe_id, value: recipe.id %>
+  <%= form.label :select_option, 'Select Option:' %>
+  <%= form.select :select_option, options_for_select(inventory_names) %>
+  <%= form.submit 'Generate', class: 'btn rounded-lg font-semibold py-3 px-5 bg-emerald-500 btn-primary' %>
+<% end %>
+    </div>
+    <div class="modal-footer bg-gray-100 p-4">
+      <!-- Modal footer content goes here -->
+      <button type="button" id="closeModalButton" class="btn rounded-lg font-semibold py-3 px-5 bg-rose-300 btn-primary">Close</button>
+    </div>
+  </div>
+</div>
+
+
