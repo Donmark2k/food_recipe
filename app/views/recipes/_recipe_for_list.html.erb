@@ -1,0 +1,22 @@
+
+<% recipe_collection.each do |recipe|%>
+
+<div class="flex border-2 text-center border-black mx-auto justify-between w-4/6 my-4 py-4">
+
+<div class='flex-col w-2/6'>
+
+	<p class='text-xl font-bold'>  <%= link_to recipe.name, recipe, class: " py-3 px-5  inline-block font-medium" %> </p>
+	<p>    <%= button_to 'Remove', recipe_path(recipe), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %></p>
+</div>
+
+
+<p class='bg-red-100 w-4/6 py-4 text-left pl-10'>
+	<%= recipe.description%>
+</p>
+
+
+
+
+</div>
+
+<%end%>
