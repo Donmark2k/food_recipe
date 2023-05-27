@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before(:each) do
-    @user = User.create(name: 'Test user', email: 'test444@gmail.com', password: '123456',
-                        password_confirmation: '123456', confirmation_token: nil, confirmed_at: Time.now)
+    @user = User.create(name: 'Test user', email: 'rails@gmail.com', password: '123456',
+                        password_confirmation: '123456')
   end
   it 'is valid with valid attributes' do
     expect(@user).to be_valid
