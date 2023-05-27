@@ -4,7 +4,7 @@ RSpec.describe Food, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
 
   it 'is valid with valid attributes' do
-    expect(Food.new(name: 'Anything', calories: 100)).to be_valid
+    expect(Food.new(name: 'Anything', measurement_unit: 100, price: 200)).to be_valid
   end
   it 'is not valid without a name' do
     food = Food.new(name: nil)
@@ -12,7 +12,7 @@ RSpec.describe Food, type: :model do
   end
 
   it 'is not valid without calories' do
-    food = Food.new(calories: nil)
+    food = Food.new(measurement_unit: nil)
     expect(food).to_not be_valid
   end
   it 'is not valid with a name longer than 50 characters' do
